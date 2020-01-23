@@ -3,7 +3,7 @@
  *
  * Created: 18/01/2020 09:38:18 م
  *  Author: mo
- */ 
+ */
 
 #include "timers.h"
 #include "Interrupts.h"
@@ -24,18 +24,18 @@ int main(void)
 {
 	uint8_t local_counter=START;
 	Led_Init(LED_0);
-	Led_Init(LED_1);
+	Led_Init(LED_1); /*Debugging*/
 	timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_8 ,0,0,T0_INTERRUPT_NORMAL);
 	pushButtonInit(BTN_0);
     while(1)
     {
 	if (pushButtonGetStatus(BTN_0))
 	{
-	Led_On(LED_0);	
+	Led_On(LED_0);
 	for(local_counter = START;local_counter<MAX;local_counter++)
 {
 timer0Start();
-timer0DelayMs(500);	
+timer0DelayMs(500);
 //softwareDelayMs(500);
 		if (pushButtonGetStatus(BTN_0))
 		{/*debuging Method To know if Led 0 is taking one or two second if
@@ -51,12 +51,12 @@ timer0DelayMs(1000);
 	}
 	else
 	{
-	Led_Off(LED_0); 
+	Led_Off(LED_0);
 	Led_Off(LED_1);
 	
 	}
-	
-	
+
+
 	}
 }
 

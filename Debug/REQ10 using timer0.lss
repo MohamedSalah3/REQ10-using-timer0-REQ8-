@@ -1037,7 +1037,7 @@ int main(void)
 	Led_Init(LED_0);
  4a2:	80 e0       	ldi	r24, 0x00	; 0
  4a4:	0e 94 4e 01 	call	0x29c	; 0x29c <Led_Init>
-	Led_Init(LED_1);
+	Led_Init(LED_1); /*Debugging*/
  4a8:	81 e0       	ldi	r24, 0x01	; 1
  4aa:	0e 94 4e 01 	call	0x29c	; 0x29c <Led_Init>
 	timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_8 ,0,0,T0_INTERRUPT_NORMAL);
@@ -1060,14 +1060,14 @@ int main(void)
  4cc:	88 23       	and	r24, r24
  4ce:	61 f1       	breq	.+88     	; 0x528 <main+0x86>
 	{
-	Led_On(LED_0);	
+	Led_On(LED_0);
  4d0:	80 e0       	ldi	r24, 0x00	; 0
  4d2:	0e 94 6f 01 	call	0x2de	; 0x2de <Led_On>
 	for(local_counter = START;local_counter<MAX;local_counter++)
 {
 timer0Start();
  4d6:	0e 94 db 02 	call	0x5b6	; 0x5b6 <timer0Start>
-timer0DelayMs(500);	
+timer0DelayMs(500);
  4da:	84 ef       	ldi	r24, 0xF4	; 244
  4dc:	91 e0       	ldi	r25, 0x01	; 1
  4de:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
@@ -1077,7 +1077,9 @@ timer0DelayMs(500);
  4e4:	0e 94 ef 01 	call	0x3de	; 0x3de <pushButtonGetStatus>
  4e8:	88 23       	and	r24, r24
  4ea:	49 f0       	breq	.+18     	; 0x4fe <main+0x5c>
-		{
+		{/*debuging Method To know if Led 0 is taking one or two second if
+			LEd 1 is on then LED 0 takes 2 seconds
+			*/
 Led_On(LED_1);
  4ec:	81 e0       	ldi	r24, 0x01	; 1
  4ee:	0e 94 6f 01 	call	0x2de	; 0x2de <Led_On>
@@ -1089,12 +1091,12 @@ timer0DelayMs(1000);
  4fa:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
 	if (pushButtonGetStatus(BTN_0))
 	{
-	Led_On(LED_0);	
+	Led_On(LED_0);
 	for(local_counter = START;local_counter<MAX;local_counter++)
 {
 timer0Start();
  4fe:	0e 94 db 02 	call	0x5b6	; 0x5b6 <timer0Start>
-timer0DelayMs(500);	
+timer0DelayMs(500);
  502:	84 ef       	ldi	r24, 0xF4	; 244
  504:	91 e0       	ldi	r25, 0x01	; 1
  506:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
@@ -1104,7 +1106,9 @@ timer0DelayMs(500);
  50c:	0e 94 ef 01 	call	0x3de	; 0x3de <pushButtonGetStatus>
  510:	88 23       	and	r24, r24
  512:	c9 f2       	breq	.-78     	; 0x4c6 <main+0x24>
-		{
+		{/*debuging Method To know if Led 0 is taking one or two second if
+			LEd 1 is on then LED 0 takes 2 seconds
+			*/
 Led_On(LED_1);
  514:	81 e0       	ldi	r24, 0x01	; 1
  516:	0e 94 6f 01 	call	0x2de	; 0x2de <Led_On>
@@ -1156,6 +1160,7 @@ void __vector_11(void)
  562:	90 93 61 00 	sts	0x0061, r25
  566:	a0 93 62 00 	sts	0x0062, r26
  56a:	b0 93 63 00 	sts	0x0063, r27
+}
  56e:	bf 91       	pop	r27
  570:	af 91       	pop	r26
  572:	9f 91       	pop	r25
