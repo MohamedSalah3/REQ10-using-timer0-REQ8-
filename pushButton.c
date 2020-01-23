@@ -63,7 +63,7 @@ switch(en_butotn_id)
 case BTN_0:
 {
 if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
-{ softwareDelayMs(10);
+{ timer0DelayMs(10);
 	if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
 	return Pressed;
 	else {return Released;}
@@ -74,7 +74,7 @@ case BTN_1:
 {
 if(gpioPinRead(BTN_1_GPIO,BTN_1_BIT) == Pressed)
 {
-softwareDelayMs(10);
+timer0DelayMs(10);
 if(gpioPinRead(BTN_1_GPIO,BTN_1_BIT) == Pressed)
 return Pressed;
 	else {return Released;}
@@ -85,7 +85,7 @@ case BTN_2:
 {
 if(gpioPinRead(BTN_2_GPIO,BTN_2_BIT) == Pressed)
 {
-	softwareDelayMs(10);
+	timer0DelayMs(10);
 	if(gpioPinRead(BTN_2_GPIO,BTN_2_BIT) == Pressed)
 	return Pressed;
 else {return Released;}
@@ -96,7 +96,7 @@ case BTN_3:
 {
 if(gpioPinRead(BTN_3_GPIO,BTN_3_BIT) == Pressed)
 {
-	softwareDelayMs(10);
+	timer0DelayMs(10);
 	if(gpioPinRead(BTN_3_GPIO,BTN_3_BIT) == Pressed)
 	return Pressed;
 else {return Released;}

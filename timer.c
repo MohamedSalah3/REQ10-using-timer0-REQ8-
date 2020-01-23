@@ -14,9 +14,33 @@ timer0Stop();
 }
 else
 {
-TCCR0 |= en_mode | en_OC0|en_prescal ;
+TCCR0 |= en_mode|en_prescal ;
 Prescaler_Value=en_prescal;
 TCNT0 = u8_initialValue;
+switch(en_OC0){
+	case  T0_OC0_DIS:
+	{
+	TCCR0 &= 0xCF;	
+		break;
+	}
+	case T0_OC0_TOGGLE:
+	{
+		TCCR0|=T0_OC0_TOGGLE;
+		break;
+	}
+	case  T0_OC0_CLEAR:
+	{
+	TCCR0 |= T0_OC0_CLEAR;	
+		
+		break;
+	}
+	case T0_OC0_SET:
+	{
+		TCCR0 |=T0_OC0_SET;
+		break;
+	}
+
+}
 OCR0  =u8_outputCompare;
 switch(en_interruptMask){
 case  T0_POLLING:
@@ -41,7 +65,8 @@ break;
 }
 void timer0Set(uint8_t u8_value)
 {
-TCNT0 =	u8_value;	 
+TCNT0 =	u8_value;
+	 
 }
  
 uint8_t timer0Read(void)
@@ -59,7 +84,6 @@ Depending on prescaler	x     X    X
 */
 void timer0Start(void)
 {
-
 	 TCCR0 &= (0xF8);		 
 	 TCCR0 |= Prescaler_Value;
 }
@@ -79,15 +103,15 @@ TCCR0 &= (0xF8);
  */
  void timer0DelayMs(uint16_t u16_delay_in_ms)
  {
-	uint32_t u32_loop=0;
+	//uint32_t u32_loop=0;
 	u32_ovf_counter=0;
 		timer0Set(48);
 		while(u32_ovf_counter <= (8)*u16_delay_in_ms);
 	
 }
  /*
- 
- 
+ at pooling _no prescaling
+ 240at TCNT0
  
  */
  void timer0DelayUs(uint32_t u32_delay_in_us)
@@ -95,11 +119,11 @@ TCCR0 &= (0xF8);
 	u32_ovf_counter=0;
 	for (u32_loop=0;u32_loop<u32_delay_in_us;u32_loop++)
 	{
-	timer0Set(254);
-	while(u32_ovf_counter <= 1);	
+	timer0Set(240);
+	while(timer0Read()<=255);	
 	//while(u32_ovf_counter <= (8*u32_delay_in_us/1000));
 	}
-	
+	TIFR |=(1<<TOV0);/*Clear the flag*/
 }/*1*/
 void timer0SwPWM(uint8_t u8_dutyCycle,uint8_t u8_frequency)
 {
