@@ -15,7 +15,7 @@
 #include "pushButton.h"
 #include "pushButtonConfig.h"
 #include "std_types.h"
-#define MAX 2
+#define MAX 10
 #define START 0
 
 uint8_t Prescaler_Value=0;
@@ -35,7 +35,7 @@ int main(void)
 	for(local_counter = START;local_counter<MAX;local_counter++)
 {
 timer0Start();
-timer0DelayMs(500);
+timer0DelayMs(100);
 //softwareDelayMs(500);
 		if (pushButtonGetStatus(BTN_0))
 		{/*debuging Method To know if Led 0 is taking one or two second if
@@ -44,7 +44,6 @@ timer0DelayMs(500);
 Led_On(LED_1);
 timer0Start();
 timer0DelayMs(1000);
-
  //	softwareDelayMs(1000);
 		}
 	}
@@ -53,7 +52,7 @@ timer0DelayMs(1000);
 	{
 	Led_Off(LED_0);
 	Led_Off(LED_1);
-	
+
 	}
 
 
