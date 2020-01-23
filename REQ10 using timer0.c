@@ -24,7 +24,7 @@ int main(void)
 {
 	uint8_t local_counter=START;
 	Led_Init(LED_0);
-	Led_Init(LED_1); /*Debugging*/
+	//Led_Init(LED_1); /*Debugging*/
 	timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_8 ,0,0,T0_INTERRUPT_NORMAL);
 	pushButtonInit(BTN_0);
     while(1)
@@ -41,7 +41,7 @@ timer0DelayMs(100);
 		{/*debuging Method To know if Led 0 is taking one or two second if
 			LEd 1 is on then LED 0 takes 2 seconds
 			*/
-Led_On(LED_1);
+/*Led_On(LED_1);*/
 timer0Start();
 timer0DelayMs(1000);
  //	softwareDelayMs(1000);
@@ -51,7 +51,7 @@ timer0DelayMs(1000);
 	else
 	{
 	Led_Off(LED_0);
-	Led_Off(LED_1);
+	/*Led_Off(LED_1);*/
 	}
 
 
