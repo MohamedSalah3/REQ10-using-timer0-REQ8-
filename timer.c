@@ -20,7 +20,7 @@ TCNT0 = u8_initialValue;
 switch(en_OC0){
 	case  T0_OC0_DIS:
 	{
-	TCCR0 &= 0xCF;	
+	TCCR0 &= 0xCF;
 		break;
 	}
 	case T0_OC0_TOGGLE:
@@ -30,8 +30,8 @@ switch(en_OC0){
 	}
 	case  T0_OC0_CLEAR:
 	{
-	TCCR0 |= T0_OC0_CLEAR;	
-		
+	TCCR0 |= T0_OC0_CLEAR;
+
 		break;
 	}
 	case T0_OC0_SET:
@@ -44,6 +44,7 @@ switch(en_OC0){
 OCR0  =u8_outputCompare;
 switch(en_interruptMask){
 case  T0_POLLING:
+G_interrupt_Disable();
 TIMSK &= T0_POLLING;
 break;
 case T0_INTERRUPT_NORMAL :
@@ -59,47 +60,47 @@ TIMSK |=T0_INTERRUPT_CMP;
 break;
 }
 }
-	 
+
 }
 
 }
 void timer0Set(uint8_t u8_value)
 {
 TCNT0 =	u8_value;
-	 
+
 }
- 
+
 uint8_t timer0Read(void)
 {
-	 return TCNT0;	 
+	 return TCNT0;
 }
- 
+
 /*
 REStart the clocck by  cs00 cs01 cs02
 						0     0    0
-						Then 
+						Then
 						cs00 cs01 cs02
 Depending on prescaler	x     X    X
-						
+
 */
 void timer0Start(void)
 {
-	 TCCR0 &= (0xF8);		 
+	 TCCR0 &= (0xF8);
 	 TCCR0 |= Prescaler_Value;
 }
 /*	choosing no clock source cs00 cs01 cs02
 						      0     0    0
-*/ 
+*/
 void timer0Stop(void)
  {
-	 
-TCCR0 &= (0xF8);		 
-	 
+
+TCCR0 &= (0xF8);
+
  }
  /*
- 
- 
- 
+
+
+
  */
  void timer0DelayMs(uint16_t u16_delay_in_ms)
  {
@@ -107,12 +108,12 @@ TCCR0 &= (0xF8);
 	u32_ovf_counter=0;
 		timer0Set(48);
 		while(u32_ovf_counter <= (8)*u16_delay_in_ms);
-	
+
 }
  /*
  at pooling _no prescaling
  240at TCNT0
- 
+
  */
  void timer0DelayUs(uint32_t u32_delay_in_us)
  {  uint32_t u32_loop=0;
@@ -120,7 +121,7 @@ TCCR0 &= (0xF8);
 	for (u32_loop=0;u32_loop<u32_delay_in_us;u32_loop++)
 	{
 	timer0Set(240);
-	while(timer0Read()<=255);	
+	while(timer0Read()<=255);
 	//while(u32_ovf_counter <= (8*u32_delay_in_us/1000));
 	}
 	TIFR |=(1<<TOV0);/*Clear the flag*/
@@ -130,19 +131,19 @@ void timer0SwPWM(uint8_t u8_dutyCycle,uint8_t u8_frequency)
 	 u32_ovf_counter=0;
 	 timer0Set(155);
 	 while(u32_ovf_counter <= 1);
-	 
-	 
-} 
+
+
+}
 
 
 void timer1Init(En_timer1Mode_t en_mode,En_timer1OC_t en_OC,En_timer1perscaler_t en_prescal,
  uint16_t u16_initialValue, uint16_t u16_outputCompareA,
- uint16_t u16_outputCompareB,uint16_t u16_inputCapture, 
+ uint16_t u16_outputCompareB,uint16_t u16_inputCapture,
  En_timer1Interrupt_t en_interruptMask)
  {
-	 
-	 
-	 
+
+
+
  }
 
 /**
@@ -151,7 +152,7 @@ void timer1Init(En_timer1Mode_t en_mode,En_timer1OC_t en_OC,En_timer1perscaler_t
  */
 void timer1Set(uint16_t u16_value)
 {
-	
+
 }
 
 /**
@@ -160,8 +161,8 @@ void timer1Set(uint16_t u16_value)
  */
 uint16_t timer1Read(void)
 {
-	
-	
+
+
 }
 
 /**
@@ -171,7 +172,7 @@ void timer1Start(void)
 {
 
 
-	
+
 }
 
 /**
@@ -179,9 +180,9 @@ void timer1Start(void)
  */
 void timer1Stop(void)
 {
-	
-	
-	
+
+
+
 }
 
 /**
@@ -190,8 +191,8 @@ void timer1Stop(void)
  */
 void timer1DelayMs(uint16_t u16_delay_in_ms)
 {
-	
-	
+
+
 }
 
 /*
@@ -199,8 +200,8 @@ void timer1DelayMs(uint16_t u16_delay_in_ms)
  */
 void timer1DelayUs(uint32_t u32_delay_in_us)
 {
-	
-	
+
+
 }
 
 /**
@@ -209,8 +210,6 @@ void timer1DelayUs(uint32_t u32_delay_in_us)
  */
 void timer1SwPWM(uint8_t u8_dutyCycle,uint8_t u8_frequency)
 {
-	
-	
+
+
 }
-
-
