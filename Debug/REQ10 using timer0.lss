@@ -3,29 +3,29 @@ REQ10 using timer0.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000006fa  00000000  00000000  00000094  2**1
+  0 .text         000006ee  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  000006fa  0000078e  2**0
+  1 .data         00000000  00800060  000006ee  00000782  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000005  00800060  00800060  0000078e  2**0
+  2 .bss          00000005  00800060  00800060  00000782  2**0
                   ALLOC
-  3 .stab         000006cc  00000000  00000000  00000790  2**2
+  3 .stab         000006cc  00000000  00000000  00000784  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      00000085  00000000  00000000  00000e5c  2**0
+  4 .stabstr      00000085  00000000  00000000  00000e50  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_aranges 00000140  00000000  00000000  00000ee8  2**3
+  5 .debug_aranges 00000140  00000000  00000000  00000ed8  2**3
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000010a6  00000000  00000000  00001028  2**0
+  6 .debug_info   000010a6  00000000  00000000  00001018  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000004be  00000000  00000000  000020ce  2**0
+  7 .debug_abbrev 000004be  00000000  00000000  000020be  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000572  00000000  00000000  0000258c  2**0
+  8 .debug_line   00000570  00000000  00000000  0000257c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000002f4  00000000  00000000  00002b00  2**2
+  9 .debug_frame  000002f4  00000000  00000000  00002aec  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000007eb  00000000  00000000  00002df4  2**0
+ 10 .debug_str    000007eb  00000000  00000000  00002de0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000007c6  00000000  00000000  000035df  2**0
+ 11 .debug_loc    000007c6  00000000  00000000  000035cb  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -42,7 +42,7 @@ Disassembly of section .text:
   20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  2c:	0c 94 88 02 	jmp	0x510	; 0x510 <__vector_11>
+  2c:	0c 94 82 02 	jmp	0x504	; 0x504 <__vector_11>
   30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -65,7 +65,7 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	ea ef       	ldi	r30, 0xFA	; 250
+  66:	ee ee       	ldi	r30, 0xEE	; 238
   68:	f6 e0       	ldi	r31, 0x06	; 6
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -88,7 +88,7 @@ Disassembly of section .text:
   82:	b1 07       	cpc	r27, r17
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 51 02 	call	0x4a2	; 0x4a2 <main>
-  8a:	0c 94 7b 03 	jmp	0x6f6	; 0x6f6 <_exit>
+  8a:	0c 94 75 03 	jmp	0x6ea	; 0x6ea <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -888,7 +888,7 @@ if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
 { timer0DelayMs(50);
  400:	82 e3       	ldi	r24, 0x32	; 50
  402:	90 e0       	ldi	r25, 0x00	; 0
- 404:	0e 94 1b 03 	call	0x636	; 0x636 <timer0DelayMs>
+ 404:	0e 94 15 03 	call	0x62a	; 0x62a <timer0DelayMs>
 	if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
  408:	82 e0       	ldi	r24, 0x02	; 2
  40a:	60 e1       	ldi	r22, 0x10	; 16
@@ -915,7 +915,7 @@ if(gpioPinRead(BTN_1_GPIO,BTN_1_BIT) == Pressed)
 timer0DelayMs(50);
  428:	82 e3       	ldi	r24, 0x32	; 50
  42a:	90 e0       	ldi	r25, 0x00	; 0
- 42c:	0e 94 1b 03 	call	0x636	; 0x636 <timer0DelayMs>
+ 42c:	0e 94 15 03 	call	0x62a	; 0x62a <timer0DelayMs>
 if(gpioPinRead(BTN_1_GPIO,BTN_1_BIT) == Pressed)
  430:	81 e0       	ldi	r24, 0x01	; 1
  432:	64 e0       	ldi	r22, 0x04	; 4
@@ -946,7 +946,7 @@ if(gpioPinRead(BTN_2_GPIO,BTN_2_BIT) == Pressed)
 	timer0DelayMs(50);
  44e:	82 e3       	ldi	r24, 0x32	; 50
  450:	90 e0       	ldi	r25, 0x00	; 0
- 452:	0e 94 1b 03 	call	0x636	; 0x636 <timer0DelayMs>
+ 452:	0e 94 15 03 	call	0x62a	; 0x62a <timer0DelayMs>
 	if(gpioPinRead(BTN_2_GPIO,BTN_2_BIT) == Pressed)
  456:	80 e0       	ldi	r24, 0x00	; 0
  458:	64 e0       	ldi	r22, 0x04	; 4
@@ -977,7 +977,7 @@ if(gpioPinRead(BTN_3_GPIO,BTN_3_BIT) == Pressed)
 	timer0DelayMs(50);
  474:	82 e3       	ldi	r24, 0x32	; 50
  476:	90 e0       	ldi	r25, 0x00	; 0
- 478:	0e 94 1b 03 	call	0x636	; 0x636 <timer0DelayMs>
+ 478:	0e 94 15 03 	call	0x62a	; 0x62a <timer0DelayMs>
 	if(gpioPinRead(BTN_3_GPIO,BTN_3_BIT) == Pressed)
  47c:	80 e0       	ldi	r24, 0x00	; 0
  47e:	68 e0       	ldi	r22, 0x08	; 8
@@ -1047,7 +1047,7 @@ int main(void)
  4b0:	00 e0       	ldi	r16, 0x00	; 0
  4b2:	ee 24       	eor	r14, r14
  4b4:	e3 94       	inc	r14
- 4b6:	0e 94 d5 02 	call	0x5aa	; 0x5aa <timer0Init>
+ 4b6:	0e 94 cf 02 	call	0x59e	; 0x59e <timer0Init>
 	pushButtonInit(BTN_0);
  4ba:	80 e0       	ldi	r24, 0x00	; 0
  4bc:	0e 94 ce 01 	call	0x39c	; 0x39c <pushButtonInit>
@@ -1056,7 +1056,7 @@ int main(void)
 	if (pushButtonGetStatus(BTN_0))
 	{
 	Led_On(LED_0);
- 4c0:	d4 e1       	ldi	r29, 0x14	; 20
+ 4c0:	da e0       	ldi	r29, 0x0A	; 10
 	//Led_Init(LED_1); /*Debugging*/
 	timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_8 ,0,0,T0_INTERRUPT_NORMAL);
 	pushButtonInit(BTN_0);
@@ -1066,7 +1066,7 @@ int main(void)
  4c2:	80 e0       	ldi	r24, 0x00	; 0
  4c4:	0e 94 ef 01 	call	0x3de	; 0x3de <pushButtonGetStatus>
  4c8:	88 23       	and	r24, r24
- 4ca:	d9 f0       	breq	.+54     	; 0x502 <main+0x60>
+ 4ca:	c1 f0       	breq	.+48     	; 0x4fc <main+0x5a>
 	{
 	Led_On(LED_0);
  4cc:	80 e0       	ldi	r24, 0x00	; 0
@@ -1075,500 +1075,495 @@ int main(void)
 	for(local_counter = START;local_counter<MAX;local_counter++)
 {
 timer0Start();
- 4d4:	0e 94 c8 02 	call	0x590	; 0x590 <timer0Start>
-timer0DelayMs(50);
- 4d8:	82 e3       	ldi	r24, 0x32	; 50
+ 4d4:	0e 94 c2 02 	call	0x584	; 0x584 <timer0Start>
+timer0DelayMs(100);
+ 4d8:	84 e6       	ldi	r24, 0x64	; 100
  4da:	90 e0       	ldi	r25, 0x00	; 0
- 4dc:	0e 94 1b 03 	call	0x636	; 0x636 <timer0DelayMs>
+ 4dc:	0e 94 15 03 	call	0x62a	; 0x62a <timer0DelayMs>
 //softwareDelayMs(500);
 		if (pushButtonGetStatus(BTN_0))
  4e0:	80 e0       	ldi	r24, 0x00	; 0
  4e2:	0e 94 ef 01 	call	0x3de	; 0x3de <pushButtonGetStatus>
  4e6:	88 23       	and	r24, r24
- 4e8:	49 f0       	breq	.+18     	; 0x4fc <main+0x5a>
+ 4e8:	31 f0       	breq	.+12     	; 0x4f6 <main+0x54>
 		{/*debuging Method To know if Led 0 is taking one or two second if
 			LEd 1 is on then LED 0 takes 2 seconds
 			*/
-Led_On(LED_1);
- 4ea:	81 e0       	ldi	r24, 0x01	; 1
- 4ec:	0e 94 6f 01 	call	0x2de	; 0x2de <Led_On>
+/*Led_On(LED_1);*/
 timer0Start();
- 4f0:	0e 94 c8 02 	call	0x590	; 0x590 <timer0Start>
+ 4ea:	0e 94 c2 02 	call	0x584	; 0x584 <timer0Start>
 timer0DelayMs(1000);
- 4f4:	88 ee       	ldi	r24, 0xE8	; 232
- 4f6:	93 e0       	ldi	r25, 0x03	; 3
- 4f8:	0e 94 1b 03 	call	0x636	; 0x636 <timer0DelayMs>
- 4fc:	c1 50       	subi	r28, 0x01	; 1
+ 4ee:	88 ee       	ldi	r24, 0xE8	; 232
+ 4f0:	93 e0       	ldi	r25, 0x03	; 3
+ 4f2:	0e 94 15 03 	call	0x62a	; 0x62a <timer0DelayMs>
+ 4f6:	c1 50       	subi	r28, 0x01	; 1
     while(1)
     {
 	if (pushButtonGetStatus(BTN_0))
 	{
 	Led_On(LED_0);
 	for(local_counter = START;local_counter<MAX;local_counter++)
- 4fe:	51 f7       	brne	.-44     	; 0x4d4 <main+0x32>
- 500:	e0 cf       	rjmp	.-64     	; 0x4c2 <main+0x20>
+ 4f8:	69 f7       	brne	.-38     	; 0x4d4 <main+0x32>
+ 4fa:	e3 cf       	rjmp	.-58     	; 0x4c2 <main+0x20>
 		}
 	}
 	}
 	else
 	{
 	Led_Off(LED_0);
- 502:	80 e0       	ldi	r24, 0x00	; 0
- 504:	0e 94 90 01 	call	0x320	; 0x320 <Led_Off>
-	Led_Off(LED_1);
- 508:	81 e0       	ldi	r24, 0x01	; 1
- 50a:	0e 94 90 01 	call	0x320	; 0x320 <Led_Off>
- 50e:	d9 cf       	rjmp	.-78     	; 0x4c2 <main+0x20>
+ 4fc:	80 e0       	ldi	r24, 0x00	; 0
+ 4fe:	0e 94 90 01 	call	0x320	; 0x320 <Led_Off>
+ 502:	df cf       	rjmp	.-66     	; 0x4c2 <main+0x20>
 
-00000510 <__vector_11>:
+00000504 <__vector_11>:
 }
 
 
 void __vector_11(void) __attribute__((signal,__INTR_ATTRS));
 void __vector_11(void)
 {
- 510:	1f 92       	push	r1
- 512:	0f 92       	push	r0
- 514:	0f b6       	in	r0, 0x3f	; 63
- 516:	0f 92       	push	r0
- 518:	11 24       	eor	r1, r1
- 51a:	8f 93       	push	r24
- 51c:	9f 93       	push	r25
- 51e:	af 93       	push	r26
- 520:	bf 93       	push	r27
+ 504:	1f 92       	push	r1
+ 506:	0f 92       	push	r0
+ 508:	0f b6       	in	r0, 0x3f	; 63
+ 50a:	0f 92       	push	r0
+ 50c:	11 24       	eor	r1, r1
+ 50e:	8f 93       	push	r24
+ 510:	9f 93       	push	r25
+ 512:	af 93       	push	r26
+ 514:	bf 93       	push	r27
 	u32_ovf_counter++;
- 522:	80 91 60 00 	lds	r24, 0x0060
- 526:	90 91 61 00 	lds	r25, 0x0061
- 52a:	a0 91 62 00 	lds	r26, 0x0062
- 52e:	b0 91 63 00 	lds	r27, 0x0063
- 532:	01 96       	adiw	r24, 0x01	; 1
- 534:	a1 1d       	adc	r26, r1
- 536:	b1 1d       	adc	r27, r1
- 538:	80 93 60 00 	sts	0x0060, r24
- 53c:	90 93 61 00 	sts	0x0061, r25
- 540:	a0 93 62 00 	sts	0x0062, r26
- 544:	b0 93 63 00 	sts	0x0063, r27
+ 516:	80 91 60 00 	lds	r24, 0x0060
+ 51a:	90 91 61 00 	lds	r25, 0x0061
+ 51e:	a0 91 62 00 	lds	r26, 0x0062
+ 522:	b0 91 63 00 	lds	r27, 0x0063
+ 526:	01 96       	adiw	r24, 0x01	; 1
+ 528:	a1 1d       	adc	r26, r1
+ 52a:	b1 1d       	adc	r27, r1
+ 52c:	80 93 60 00 	sts	0x0060, r24
+ 530:	90 93 61 00 	sts	0x0061, r25
+ 534:	a0 93 62 00 	sts	0x0062, r26
+ 538:	b0 93 63 00 	sts	0x0063, r27
 }
- 548:	bf 91       	pop	r27
- 54a:	af 91       	pop	r26
- 54c:	9f 91       	pop	r25
- 54e:	8f 91       	pop	r24
- 550:	0f 90       	pop	r0
- 552:	0f be       	out	0x3f, r0	; 63
- 554:	0f 90       	pop	r0
- 556:	1f 90       	pop	r1
- 558:	18 95       	reti
+ 53c:	bf 91       	pop	r27
+ 53e:	af 91       	pop	r26
+ 540:	9f 91       	pop	r25
+ 542:	8f 91       	pop	r24
+ 544:	0f 90       	pop	r0
+ 546:	0f be       	out	0x3f, r0	; 63
+ 548:	0f 90       	pop	r0
+ 54a:	1f 90       	pop	r1
+ 54c:	18 95       	reti
 
-0000055a <softwareDelayMs>:
+0000054e <softwareDelayMs>:
  *
  * Created: 17/01/2020 03:54:09 م
  *  Author: mo
  */ 
 #include "softwareDelay.h"
 void softwareDelayMs(uint32_t u32_delay_in_ms){
- 55a:	ab 01       	movw	r20, r22
- 55c:	bc 01       	movw	r22, r24
+ 54e:	ab 01       	movw	r20, r22
+ 550:	bc 01       	movw	r22, r24
 uint32_t Local_Nope_counter=0;
 while (u32_delay_in_ms > 0)
- 55e:	41 15       	cp	r20, r1
- 560:	51 05       	cpc	r21, r1
- 562:	61 05       	cpc	r22, r1
- 564:	71 05       	cpc	r23, r1
- 566:	61 f4       	brne	.+24     	; 0x580 <softwareDelayMs+0x26>
- 568:	08 95       	ret
- 56a:	01 96       	adiw	r24, 0x01	; 1
+ 552:	41 15       	cp	r20, r1
+ 554:	51 05       	cpc	r21, r1
+ 556:	61 05       	cpc	r22, r1
+ 558:	71 05       	cpc	r23, r1
+ 55a:	61 f4       	brne	.+24     	; 0x574 <softwareDelayMs+0x26>
+ 55c:	08 95       	ret
+ 55e:	01 96       	adiw	r24, 0x01	; 1
 {
 	for(Local_Nope_counter = 0 ;Local_Nope_counter<1500;Local_Nope_counter++);
- 56c:	e5 e0       	ldi	r30, 0x05	; 5
- 56e:	8c 3d       	cpi	r24, 0xDC	; 220
- 570:	9e 07       	cpc	r25, r30
- 572:	d9 f7       	brne	.-10     	; 0x56a <softwareDelayMs+0x10>
+ 560:	e5 e0       	ldi	r30, 0x05	; 5
+ 562:	8c 3d       	cpi	r24, 0xDC	; 220
+ 564:	9e 07       	cpc	r25, r30
+ 566:	d9 f7       	brne	.-10     	; 0x55e <softwareDelayMs+0x10>
 
 u32_delay_in_ms--;	
- 574:	41 50       	subi	r20, 0x01	; 1
- 576:	50 40       	sbci	r21, 0x00	; 0
- 578:	60 40       	sbci	r22, 0x00	; 0
- 57a:	70 40       	sbci	r23, 0x00	; 0
+ 568:	41 50       	subi	r20, 0x01	; 1
+ 56a:	50 40       	sbci	r21, 0x00	; 0
+ 56c:	60 40       	sbci	r22, 0x00	; 0
+ 56e:	70 40       	sbci	r23, 0x00	; 0
  *  Author: mo
  */ 
 #include "softwareDelay.h"
 void softwareDelayMs(uint32_t u32_delay_in_ms){
 uint32_t Local_Nope_counter=0;
 while (u32_delay_in_ms > 0)
- 57c:	19 f4       	brne	.+6      	; 0x584 <softwareDelayMs+0x2a>
- 57e:	08 95       	ret
+ 570:	19 f4       	brne	.+6      	; 0x578 <softwareDelayMs+0x2a>
+ 572:	08 95       	ret
  *
  * Created: 17/01/2020 03:54:09 م
  *  Author: mo
  */ 
 #include "softwareDelay.h"
 void softwareDelayMs(uint32_t u32_delay_in_ms){
- 580:	20 e0       	ldi	r18, 0x00	; 0
- 582:	30 e0       	ldi	r19, 0x00	; 0
- 584:	c9 01       	movw	r24, r18
- 586:	f1 cf       	rjmp	.-30     	; 0x56a <softwareDelayMs+0x10>
+ 574:	20 e0       	ldi	r18, 0x00	; 0
+ 576:	30 e0       	ldi	r19, 0x00	; 0
+ 578:	c9 01       	movw	r24, r18
+ 57a:	f1 cf       	rjmp	.-30     	; 0x55e <softwareDelayMs+0x10>
 
-00000588 <timer0Set>:
+0000057c <timer0Set>:
 }
 
 }
 void timer0Set(uint8_t u8_value)
 {
 TCNT0 =	u8_value;
- 588:	82 bf       	out	0x32, r24	; 50
+ 57c:	82 bf       	out	0x32, r24	; 50
 }
- 58a:	08 95       	ret
+ 57e:	08 95       	ret
 
-0000058c <timer0Read>:
+00000580 <timer0Read>:
 
 uint8_t timer0Read(void)
 {
 	 return TCNT0;
- 58c:	82 b7       	in	r24, 0x32	; 50
+ 580:	82 b7       	in	r24, 0x32	; 50
 }
- 58e:	08 95       	ret
+ 582:	08 95       	ret
 
-00000590 <timer0Start>:
+00000584 <timer0Start>:
 Depending on prescaler	x     X    X
 
 */
 void timer0Start(void)
 {
 	 TCCR0 &= (0xF8);
- 590:	83 b7       	in	r24, 0x33	; 51
- 592:	88 7f       	andi	r24, 0xF8	; 248
- 594:	83 bf       	out	0x33, r24	; 51
+ 584:	83 b7       	in	r24, 0x33	; 51
+ 586:	88 7f       	andi	r24, 0xF8	; 248
+ 588:	83 bf       	out	0x33, r24	; 51
 	 TCCR0 |= Prescaler_Value;
- 596:	93 b7       	in	r25, 0x33	; 51
- 598:	80 91 64 00 	lds	r24, 0x0064
- 59c:	89 2b       	or	r24, r25
- 59e:	83 bf       	out	0x33, r24	; 51
+ 58a:	93 b7       	in	r25, 0x33	; 51
+ 58c:	80 91 64 00 	lds	r24, 0x0064
+ 590:	89 2b       	or	r24, r25
+ 592:	83 bf       	out	0x33, r24	; 51
 }
- 5a0:	08 95       	ret
+ 594:	08 95       	ret
 
-000005a2 <timer0Stop>:
+00000596 <timer0Stop>:
 						      0     0    0
 */
 void timer0Stop(void)
  {
 
 TCCR0 &= (0xF8);
- 5a2:	83 b7       	in	r24, 0x33	; 51
- 5a4:	88 7f       	andi	r24, 0xF8	; 248
- 5a6:	83 bf       	out	0x33, r24	; 51
+ 596:	83 b7       	in	r24, 0x33	; 51
+ 598:	88 7f       	andi	r24, 0xF8	; 248
+ 59a:	83 bf       	out	0x33, r24	; 51
 
  }
- 5a8:	08 95       	ret
+ 59c:	08 95       	ret
 
-000005aa <timer0Init>:
+0000059e <timer0Init>:
 #include "ledConfig.h"
 #include "timers.h"
 #include "registers.h"
 #include "Interrupts.h"
 void timer0Init(En_timer0Mode_t en_mode,En_timer0OC_t en_OC0,En_timer0perscaler_t en_prescal,uint8_t u8_initialValue, uint8_t u8_outputCompare,En_timer0Interrupt_t en_interruptMask)
 {
- 5aa:	ef 92       	push	r14
- 5ac:	0f 93       	push	r16
+ 59e:	ef 92       	push	r14
+ 5a0:	0f 93       	push	r16
 if(en_prescal == T0_NO_CLOCK)
- 5ae:	44 23       	and	r20, r20
- 5b0:	19 f4       	brne	.+6      	; 0x5b8 <timer0Init+0xe>
+ 5a2:	44 23       	and	r20, r20
+ 5a4:	19 f4       	brne	.+6      	; 0x5ac <timer0Init+0xe>
 {/*
 if there is no clock the timer will be disabled
 */
 timer0Stop();
- 5b2:	0e 94 d1 02 	call	0x5a2	; 0x5a2 <timer0Stop>
- 5b6:	3c c0       	rjmp	.+120    	; 0x630 <timer0Init+0x86>
+ 5a6:	0e 94 cb 02 	call	0x596	; 0x596 <timer0Stop>
+ 5aa:	3c c0       	rjmp	.+120    	; 0x624 <timer0Init+0x86>
 }
 else
 {
 TCCR0 |= en_mode|en_prescal ;
- 5b8:	93 b7       	in	r25, 0x33	; 51
- 5ba:	89 2b       	or	r24, r25
- 5bc:	84 2b       	or	r24, r20
- 5be:	83 bf       	out	0x33, r24	; 51
+ 5ac:	93 b7       	in	r25, 0x33	; 51
+ 5ae:	89 2b       	or	r24, r25
+ 5b0:	84 2b       	or	r24, r20
+ 5b2:	83 bf       	out	0x33, r24	; 51
 Prescaler_Value=en_prescal;
- 5c0:	40 93 64 00 	sts	0x0064, r20
+ 5b4:	40 93 64 00 	sts	0x0064, r20
 TCNT0 = u8_initialValue;
- 5c4:	22 bf       	out	0x32, r18	; 50
+ 5b8:	22 bf       	out	0x32, r18	; 50
 switch(en_OC0){
- 5c6:	60 31       	cpi	r22, 0x10	; 16
- 5c8:	71 f0       	breq	.+28     	; 0x5e6 <timer0Init+0x3c>
- 5ca:	61 31       	cpi	r22, 0x11	; 17
- 5cc:	18 f4       	brcc	.+6      	; 0x5d4 <timer0Init+0x2a>
- 5ce:	66 23       	and	r22, r22
- 5d0:	31 f0       	breq	.+12     	; 0x5de <timer0Init+0x34>
- 5d2:	14 c0       	rjmp	.+40     	; 0x5fc <timer0Init+0x52>
- 5d4:	60 32       	cpi	r22, 0x20	; 32
- 5d6:	59 f0       	breq	.+22     	; 0x5ee <timer0Init+0x44>
- 5d8:	60 33       	cpi	r22, 0x30	; 48
- 5da:	81 f4       	brne	.+32     	; 0x5fc <timer0Init+0x52>
- 5dc:	0c c0       	rjmp	.+24     	; 0x5f6 <timer0Init+0x4c>
+ 5ba:	60 31       	cpi	r22, 0x10	; 16
+ 5bc:	71 f0       	breq	.+28     	; 0x5da <timer0Init+0x3c>
+ 5be:	61 31       	cpi	r22, 0x11	; 17
+ 5c0:	18 f4       	brcc	.+6      	; 0x5c8 <timer0Init+0x2a>
+ 5c2:	66 23       	and	r22, r22
+ 5c4:	31 f0       	breq	.+12     	; 0x5d2 <timer0Init+0x34>
+ 5c6:	14 c0       	rjmp	.+40     	; 0x5f0 <timer0Init+0x52>
+ 5c8:	60 32       	cpi	r22, 0x20	; 32
+ 5ca:	59 f0       	breq	.+22     	; 0x5e2 <timer0Init+0x44>
+ 5cc:	60 33       	cpi	r22, 0x30	; 48
+ 5ce:	81 f4       	brne	.+32     	; 0x5f0 <timer0Init+0x52>
+ 5d0:	0c c0       	rjmp	.+24     	; 0x5ea <timer0Init+0x4c>
 	case  T0_OC0_DIS:
 	{
 	TCCR0 &= 0xCF;
- 5de:	83 b7       	in	r24, 0x33	; 51
- 5e0:	8f 7c       	andi	r24, 0xCF	; 207
- 5e2:	83 bf       	out	0x33, r24	; 51
+ 5d2:	83 b7       	in	r24, 0x33	; 51
+ 5d4:	8f 7c       	andi	r24, 0xCF	; 207
+ 5d6:	83 bf       	out	0x33, r24	; 51
 		break;
- 5e4:	0b c0       	rjmp	.+22     	; 0x5fc <timer0Init+0x52>
+ 5d8:	0b c0       	rjmp	.+22     	; 0x5f0 <timer0Init+0x52>
 	}
 	case T0_OC0_TOGGLE:
 	{
 		TCCR0|=T0_OC0_TOGGLE;
- 5e6:	83 b7       	in	r24, 0x33	; 51
- 5e8:	80 61       	ori	r24, 0x10	; 16
- 5ea:	83 bf       	out	0x33, r24	; 51
+ 5da:	83 b7       	in	r24, 0x33	; 51
+ 5dc:	80 61       	ori	r24, 0x10	; 16
+ 5de:	83 bf       	out	0x33, r24	; 51
 		break;
- 5ec:	07 c0       	rjmp	.+14     	; 0x5fc <timer0Init+0x52>
+ 5e0:	07 c0       	rjmp	.+14     	; 0x5f0 <timer0Init+0x52>
 	}
 	case  T0_OC0_CLEAR:
 	{
 	TCCR0 |= T0_OC0_CLEAR;
- 5ee:	83 b7       	in	r24, 0x33	; 51
- 5f0:	80 62       	ori	r24, 0x20	; 32
- 5f2:	83 bf       	out	0x33, r24	; 51
+ 5e2:	83 b7       	in	r24, 0x33	; 51
+ 5e4:	80 62       	ori	r24, 0x20	; 32
+ 5e6:	83 bf       	out	0x33, r24	; 51
 
 		break;
- 5f4:	03 c0       	rjmp	.+6      	; 0x5fc <timer0Init+0x52>
+ 5e8:	03 c0       	rjmp	.+6      	; 0x5f0 <timer0Init+0x52>
 	}
 	case T0_OC0_SET:
 	{
 		TCCR0 |=T0_OC0_SET;
- 5f6:	83 b7       	in	r24, 0x33	; 51
- 5f8:	80 63       	ori	r24, 0x30	; 48
- 5fa:	83 bf       	out	0x33, r24	; 51
+ 5ea:	83 b7       	in	r24, 0x33	; 51
+ 5ec:	80 63       	ori	r24, 0x30	; 48
+ 5ee:	83 bf       	out	0x33, r24	; 51
 		break;
 	}
 
 }
 OCR0  =u8_outputCompare;
- 5fc:	0c bf       	out	0x3c, r16	; 60
+ 5f0:	0c bf       	out	0x3c, r16	; 60
 switch(en_interruptMask){
- 5fe:	81 e0       	ldi	r24, 0x01	; 1
- 600:	e8 16       	cp	r14, r24
- 602:	59 f0       	breq	.+22     	; 0x61a <timer0Init+0x70>
- 604:	e8 16       	cp	r14, r24
- 606:	20 f0       	brcs	.+8      	; 0x610 <timer0Init+0x66>
- 608:	82 e0       	ldi	r24, 0x02	; 2
- 60a:	e8 16       	cp	r14, r24
- 60c:	89 f4       	brne	.+34     	; 0x630 <timer0Init+0x86>
- 60e:	0b c0       	rjmp	.+22     	; 0x626 <timer0Init+0x7c>
+ 5f2:	81 e0       	ldi	r24, 0x01	; 1
+ 5f4:	e8 16       	cp	r14, r24
+ 5f6:	59 f0       	breq	.+22     	; 0x60e <timer0Init+0x70>
+ 5f8:	e8 16       	cp	r14, r24
+ 5fa:	20 f0       	brcs	.+8      	; 0x604 <timer0Init+0x66>
+ 5fc:	82 e0       	ldi	r24, 0x02	; 2
+ 5fe:	e8 16       	cp	r14, r24
+ 600:	89 f4       	brne	.+34     	; 0x624 <timer0Init+0x86>
+ 602:	0b c0       	rjmp	.+22     	; 0x61a <timer0Init+0x7c>
 case  T0_POLLING:
 G_interrupt_Disable();
- 610:	0e 94 49 01 	call	0x292	; 0x292 <G_interrupt_Disable>
+ 604:	0e 94 49 01 	call	0x292	; 0x292 <G_interrupt_Disable>
 TIMSK &= T0_POLLING;
- 614:	89 b7       	in	r24, 0x39	; 57
- 616:	19 be       	out	0x39, r1	; 57
+ 608:	89 b7       	in	r24, 0x39	; 57
+ 60a:	19 be       	out	0x39, r1	; 57
 break;
- 618:	0b c0       	rjmp	.+22     	; 0x630 <timer0Init+0x86>
+ 60c:	0b c0       	rjmp	.+22     	; 0x624 <timer0Init+0x86>
 case T0_INTERRUPT_NORMAL :
 {
 G_interrupt_Enable();
- 61a:	0e 94 45 01 	call	0x28a	; 0x28a <G_interrupt_Enable>
+ 60e:	0e 94 45 01 	call	0x28a	; 0x28a <G_interrupt_Enable>
 TIMSK |= T0_INTERRUPT_NORMAL;
- 61e:	89 b7       	in	r24, 0x39	; 57
- 620:	81 60       	ori	r24, 0x01	; 1
- 622:	89 bf       	out	0x39, r24	; 57
+ 612:	89 b7       	in	r24, 0x39	; 57
+ 614:	81 60       	ori	r24, 0x01	; 1
+ 616:	89 bf       	out	0x39, r24	; 57
 break;
- 624:	05 c0       	rjmp	.+10     	; 0x630 <timer0Init+0x86>
+ 618:	05 c0       	rjmp	.+10     	; 0x624 <timer0Init+0x86>
 }
 case T0_INTERRUPT_CMP:
 {
 G_interrupt_Enable();
- 626:	0e 94 45 01 	call	0x28a	; 0x28a <G_interrupt_Enable>
+ 61a:	0e 94 45 01 	call	0x28a	; 0x28a <G_interrupt_Enable>
 TIMSK |=T0_INTERRUPT_CMP;
- 62a:	89 b7       	in	r24, 0x39	; 57
- 62c:	82 60       	ori	r24, 0x02	; 2
- 62e:	89 bf       	out	0x39, r24	; 57
+ 61e:	89 b7       	in	r24, 0x39	; 57
+ 620:	82 60       	ori	r24, 0x02	; 2
+ 622:	89 bf       	out	0x39, r24	; 57
 }
 }
 
 }
 
 }
- 630:	0f 91       	pop	r16
- 632:	ef 90       	pop	r14
- 634:	08 95       	ret
+ 624:	0f 91       	pop	r16
+ 626:	ef 90       	pop	r14
+ 628:	08 95       	ret
 
-00000636 <timer0DelayMs>:
+0000062a <timer0DelayMs>:
 
 
 
  */
  void timer0DelayMs(uint16_t u16_delay_in_ms)
  {
- 636:	cf 93       	push	r28
- 638:	df 93       	push	r29
- 63a:	ec 01       	movw	r28, r24
+ 62a:	cf 93       	push	r28
+ 62c:	df 93       	push	r29
+ 62e:	ec 01       	movw	r28, r24
 	//uint32_t u32_loop=0;
 	u32_ovf_counter=0;
- 63c:	10 92 60 00 	sts	0x0060, r1
- 640:	10 92 61 00 	sts	0x0061, r1
- 644:	10 92 62 00 	sts	0x0062, r1
- 648:	10 92 63 00 	sts	0x0063, r1
+ 630:	10 92 60 00 	sts	0x0060, r1
+ 634:	10 92 61 00 	sts	0x0061, r1
+ 638:	10 92 62 00 	sts	0x0062, r1
+ 63c:	10 92 63 00 	sts	0x0063, r1
 		timer0Set(48);
- 64c:	80 e3       	ldi	r24, 0x30	; 48
- 64e:	0e 94 c4 02 	call	0x588	; 0x588 <timer0Set>
+ 640:	80 e3       	ldi	r24, 0x30	; 48
+ 642:	0e 94 be 02 	call	0x57c	; 0x57c <timer0Set>
 		while(u32_ovf_counter <= (8)*u16_delay_in_ms);
- 652:	cc 0f       	add	r28, r28
- 654:	dd 1f       	adc	r29, r29
- 656:	cc 0f       	add	r28, r28
- 658:	dd 1f       	adc	r29, r29
- 65a:	cc 0f       	add	r28, r28
- 65c:	dd 1f       	adc	r29, r29
- 65e:	ae 01       	movw	r20, r28
- 660:	60 e0       	ldi	r22, 0x00	; 0
- 662:	70 e0       	ldi	r23, 0x00	; 0
- 664:	80 91 60 00 	lds	r24, 0x0060
- 668:	90 91 61 00 	lds	r25, 0x0061
- 66c:	a0 91 62 00 	lds	r26, 0x0062
- 670:	b0 91 63 00 	lds	r27, 0x0063
- 674:	48 17       	cp	r20, r24
- 676:	59 07       	cpc	r21, r25
- 678:	6a 07       	cpc	r22, r26
- 67a:	7b 07       	cpc	r23, r27
- 67c:	98 f7       	brcc	.-26     	; 0x664 <timer0DelayMs+0x2e>
+ 646:	cc 0f       	add	r28, r28
+ 648:	dd 1f       	adc	r29, r29
+ 64a:	cc 0f       	add	r28, r28
+ 64c:	dd 1f       	adc	r29, r29
+ 64e:	cc 0f       	add	r28, r28
+ 650:	dd 1f       	adc	r29, r29
+ 652:	ae 01       	movw	r20, r28
+ 654:	60 e0       	ldi	r22, 0x00	; 0
+ 656:	70 e0       	ldi	r23, 0x00	; 0
+ 658:	80 91 60 00 	lds	r24, 0x0060
+ 65c:	90 91 61 00 	lds	r25, 0x0061
+ 660:	a0 91 62 00 	lds	r26, 0x0062
+ 664:	b0 91 63 00 	lds	r27, 0x0063
+ 668:	48 17       	cp	r20, r24
+ 66a:	59 07       	cpc	r21, r25
+ 66c:	6a 07       	cpc	r22, r26
+ 66e:	7b 07       	cpc	r23, r27
+ 670:	98 f7       	brcc	.-26     	; 0x658 <timer0DelayMs+0x2e>
 
 }
- 67e:	df 91       	pop	r29
- 680:	cf 91       	pop	r28
- 682:	08 95       	ret
+ 672:	df 91       	pop	r29
+ 674:	cf 91       	pop	r28
+ 676:	08 95       	ret
 
-00000684 <timer0DelayUs>:
+00000678 <timer0DelayUs>:
  at pooling _no prescaling
  240at TCNT0
 
  */
  void timer0DelayUs(uint32_t u32_delay_in_us)
  {  uint32_t u32_loop=0;
- 684:	dc 01       	movw	r26, r24
- 686:	cb 01       	movw	r24, r22
+ 678:	dc 01       	movw	r26, r24
+ 67a:	cb 01       	movw	r24, r22
 	u32_ovf_counter=0;
- 688:	10 92 60 00 	sts	0x0060, r1
- 68c:	10 92 61 00 	sts	0x0061, r1
- 690:	10 92 62 00 	sts	0x0062, r1
- 694:	10 92 63 00 	sts	0x0063, r1
+ 67c:	10 92 60 00 	sts	0x0060, r1
+ 680:	10 92 61 00 	sts	0x0061, r1
+ 684:	10 92 62 00 	sts	0x0062, r1
+ 688:	10 92 63 00 	sts	0x0063, r1
 	for (u32_loop=0;u32_loop<u32_delay_in_us;u32_loop++)
- 698:	00 97       	sbiw	r24, 0x00	; 0
- 69a:	a1 05       	cpc	r26, r1
- 69c:	b1 05       	cpc	r27, r1
- 69e:	31 f0       	breq	.+12     	; 0x6ac <timer0DelayUs+0x28>
+ 68c:	00 97       	sbiw	r24, 0x00	; 0
+ 68e:	a1 05       	cpc	r26, r1
+ 690:	b1 05       	cpc	r27, r1
+ 692:	31 f0       	breq	.+12     	; 0x6a0 <timer0DelayUs+0x28>
 	{
 	timer0Set(240);
- 6a0:	80 ef       	ldi	r24, 0xF0	; 240
- 6a2:	0e 94 c4 02 	call	0x588	; 0x588 <timer0Set>
+ 694:	80 ef       	ldi	r24, 0xF0	; 240
+ 696:	0e 94 be 02 	call	0x57c	; 0x57c <timer0Set>
 	while(timer0Read()<=255);
- 6a6:	0e 94 c6 02 	call	0x58c	; 0x58c <timer0Read>
- 6aa:	fd cf       	rjmp	.-6      	; 0x6a6 <timer0DelayUs+0x22>
+ 69a:	0e 94 c0 02 	call	0x580	; 0x580 <timer0Read>
+ 69e:	fd cf       	rjmp	.-6      	; 0x69a <timer0DelayUs+0x22>
 	//while(u32_ovf_counter <= (8*u32_delay_in_us/1000));
 	}
 	TIFR |=(1<<TOV0);/*Clear the flag*/
- 6ac:	88 b7       	in	r24, 0x38	; 56
- 6ae:	81 60       	ori	r24, 0x01	; 1
- 6b0:	88 bf       	out	0x38, r24	; 56
+ 6a0:	88 b7       	in	r24, 0x38	; 56
+ 6a2:	81 60       	ori	r24, 0x01	; 1
+ 6a4:	88 bf       	out	0x38, r24	; 56
 }/*1*/
- 6b2:	08 95       	ret
+ 6a6:	08 95       	ret
 
-000006b4 <timer0SwPWM>:
+000006a8 <timer0SwPWM>:
 void timer0SwPWM(uint8_t u8_dutyCycle,uint8_t u8_frequency)
 {
 	 u32_ovf_counter=0;
- 6b4:	10 92 60 00 	sts	0x0060, r1
- 6b8:	10 92 61 00 	sts	0x0061, r1
- 6bc:	10 92 62 00 	sts	0x0062, r1
- 6c0:	10 92 63 00 	sts	0x0063, r1
+ 6a8:	10 92 60 00 	sts	0x0060, r1
+ 6ac:	10 92 61 00 	sts	0x0061, r1
+ 6b0:	10 92 62 00 	sts	0x0062, r1
+ 6b4:	10 92 63 00 	sts	0x0063, r1
 	 timer0Set(155);
- 6c4:	8b e9       	ldi	r24, 0x9B	; 155
- 6c6:	0e 94 c4 02 	call	0x588	; 0x588 <timer0Set>
+ 6b8:	8b e9       	ldi	r24, 0x9B	; 155
+ 6ba:	0e 94 be 02 	call	0x57c	; 0x57c <timer0Set>
 	 while(u32_ovf_counter <= 1);
- 6ca:	80 91 60 00 	lds	r24, 0x0060
- 6ce:	90 91 61 00 	lds	r25, 0x0061
- 6d2:	a0 91 62 00 	lds	r26, 0x0062
- 6d6:	b0 91 63 00 	lds	r27, 0x0063
- 6da:	82 30       	cpi	r24, 0x02	; 2
- 6dc:	91 05       	cpc	r25, r1
- 6de:	a1 05       	cpc	r26, r1
- 6e0:	b1 05       	cpc	r27, r1
- 6e2:	98 f3       	brcs	.-26     	; 0x6ca <timer0SwPWM+0x16>
+ 6be:	80 91 60 00 	lds	r24, 0x0060
+ 6c2:	90 91 61 00 	lds	r25, 0x0061
+ 6c6:	a0 91 62 00 	lds	r26, 0x0062
+ 6ca:	b0 91 63 00 	lds	r27, 0x0063
+ 6ce:	82 30       	cpi	r24, 0x02	; 2
+ 6d0:	91 05       	cpc	r25, r1
+ 6d2:	a1 05       	cpc	r26, r1
+ 6d4:	b1 05       	cpc	r27, r1
+ 6d6:	98 f3       	brcs	.-26     	; 0x6be <timer0SwPWM+0x16>
 
 
 }
- 6e4:	08 95       	ret
+ 6d8:	08 95       	ret
 
-000006e6 <timer1Init>:
+000006da <timer1Init>:
  En_timer1Interrupt_t en_interruptMask)
  {
 
 
 
  }
- 6e6:	08 95       	ret
+ 6da:	08 95       	ret
 
-000006e8 <timer1Set>:
+000006dc <timer1Set>:
  * @param value
  */
 void timer1Set(uint16_t u16_value)
 {
 
 }
- 6e8:	08 95       	ret
+ 6dc:	08 95       	ret
 
-000006ea <timer1Read>:
+000006de <timer1Read>:
  */
 uint16_t timer1Read(void)
 {
 
 
 }
- 6ea:	08 95       	ret
+ 6de:	08 95       	ret
 
-000006ec <timer1Start>:
+000006e0 <timer1Start>:
 void timer1Start(void)
 {
 
 
 
 }
- 6ec:	08 95       	ret
+ 6e0:	08 95       	ret
 
-000006ee <timer1Stop>:
+000006e2 <timer1Stop>:
 void timer1Stop(void)
 {
 
 
 
 }
- 6ee:	08 95       	ret
+ 6e2:	08 95       	ret
 
-000006f0 <timer1DelayMs>:
+000006e4 <timer1DelayMs>:
  */
 void timer1DelayMs(uint16_t u16_delay_in_ms)
 {
 
 
 }
- 6f0:	08 95       	ret
+ 6e4:	08 95       	ret
 
-000006f2 <timer1DelayUs>:
+000006e6 <timer1DelayUs>:
  */
 void timer1DelayUs(uint32_t u32_delay_in_us)
 {
 
 
 }
- 6f2:	08 95       	ret
+ 6e6:	08 95       	ret
 
-000006f4 <timer1SwPWM>:
+000006e8 <timer1SwPWM>:
  */
 void timer1SwPWM(uint8_t u8_dutyCycle,uint8_t u8_frequency)
 {
 
 
 }
- 6f4:	08 95       	ret
+ 6e8:	08 95       	ret
 
-000006f6 <_exit>:
- 6f6:	f8 94       	cli
+000006ea <_exit>:
+ 6ea:	f8 94       	cli
 
-000006f8 <__stop_program>:
- 6f8:	ff cf       	rjmp	.-2      	; 0x6f8 <__stop_program>
+000006ec <__stop_program>:
+ 6ec:	ff cf       	rjmp	.-2      	; 0x6ec <__stop_program>
