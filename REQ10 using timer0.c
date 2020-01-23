@@ -52,7 +52,6 @@ timer0DelayMs(1000);
 	{
 	Led_Off(LED_0);
 	Led_Off(LED_1);
-
 	}
 
 
