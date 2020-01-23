@@ -67,7 +67,6 @@ break;
 void timer0Set(uint8_t u8_value)
 {
 TCNT0 =	u8_value;
-
 }
 
 uint8_t timer0Read(void)

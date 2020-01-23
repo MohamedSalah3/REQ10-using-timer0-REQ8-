@@ -3,15 +3,15 @@ REQ10 using timer0.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000071c  00000000  00000000  00000094  2**1
+  0 .text         00000720  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  0000071c  000007b0  2**0
+  1 .data         00000000  00800060  00000720  000007b4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000005  00800060  00800060  000007b0  2**0
+  2 .bss          00000005  00800060  00800060  000007b4  2**0
                   ALLOC
-  3 .stab         000006cc  00000000  00000000  000007b0  2**2
+  3 .stab         000006cc  00000000  00000000  000007b4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      00000085  00000000  00000000  00000e7c  2**0
+  4 .stabstr      00000085  00000000  00000000  00000e80  2**0
                   CONTENTS, READONLY, DEBUGGING
   5 .debug_aranges 00000140  00000000  00000000  00000f08  2**3
                   CONTENTS, READONLY, DEBUGGING
@@ -19,13 +19,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 000004be  00000000  00000000  000020ee  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000574  00000000  00000000  000025ac  2**0
+  8 .debug_line   00000575  00000000  00000000  000025ac  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000002f4  00000000  00000000  00002b20  2**2
+  9 .debug_frame  000002f4  00000000  00000000  00002b24  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000007eb  00000000  00000000  00002e14  2**0
+ 10 .debug_str    000007eb  00000000  00000000  00002e18  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000007bd  00000000  00000000  000035ff  2**0
+ 11 .debug_loc    000007de  00000000  00000000  00003603  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -65,7 +65,7 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	ec e1       	ldi	r30, 0x1C	; 28
+  66:	e0 e2       	ldi	r30, 0x20	; 32
   68:	f7 e0       	ldi	r31, 0x07	; 7
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -88,7 +88,7 @@ Disassembly of section .text:
   82:	b1 07       	cpc	r27, r17
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 51 02 	call	0x4a2	; 0x4a2 <main>
-  8a:	0c 94 8c 03 	jmp	0x718	; 0x718 <_exit>
+  8a:	0c 94 8e 03 	jmp	0x71c	; 0x71c <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -804,7 +804,7 @@ gpioPinToggle(LED_3_GPIO,LED_3_BIT);
 */
 void pushButtonInit(En_buttonId_t en_butotn_id)
 {
-	
+
 switch(en_butotn_id)
  39c:	81 30       	cpi	r24, 0x01	; 1
  39e:	69 f0       	breq	.+26     	; 0x3ba <pushButtonInit+0x1e>
@@ -863,7 +863,7 @@ gpioPinDirection(BTN_3_GPIO,BTN_3_BIT,LOW);
 
 En_buttonStatus_t pushButtonGetStatus(En_buttonId_t en_butotn_id)
 {
-	
+
 switch(en_butotn_id)
  3de:	81 30       	cpi	r24, 0x01	; 1
  3e0:	e9 f0       	breq	.+58     	; 0x41c <pushButtonGetStatus+0x3e>
@@ -885,10 +885,10 @@ if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
  3fa:	81 30       	cpi	r24, 0x01	; 1
  3fc:	09 f0       	breq	.+2      	; 0x400 <pushButtonGetStatus+0x22>
  3fe:	48 c0       	rjmp	.+144    	; 0x490 <pushButtonGetStatus+0xb2>
-{ timer0DelayMs(10);
- 400:	8a e0       	ldi	r24, 0x0A	; 10
+{ timer0DelayMs(50);
+ 400:	82 e3       	ldi	r24, 0x32	; 50
  402:	90 e0       	ldi	r25, 0x00	; 0
- 404:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
+ 404:	0e 94 2e 03 	call	0x65c	; 0x65c <timer0DelayMs>
 	if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
  408:	82 e0       	ldi	r24, 0x02	; 2
  40a:	60 e1       	ldi	r22, 0x10	; 16
@@ -901,7 +901,7 @@ if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
  418:	90 e0       	ldi	r25, 0x00	; 0
  41a:	41 c0       	rjmp	.+130    	; 0x49e <pushButtonGetStatus+0xc0>
 }else{return Released;}
-break;		
+break;
 }
 case BTN_1:
 {
@@ -912,10 +912,10 @@ if(gpioPinRead(BTN_1_GPIO,BTN_1_BIT) == Pressed)
  424:	81 30       	cpi	r24, 0x01	; 1
  426:	b1 f5       	brne	.+108    	; 0x494 <pushButtonGetStatus+0xb6>
 {
-timer0DelayMs(10);
- 428:	8a e0       	ldi	r24, 0x0A	; 10
+timer0DelayMs(50);
+ 428:	82 e3       	ldi	r24, 0x32	; 50
  42a:	90 e0       	ldi	r25, 0x00	; 0
- 42c:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
+ 42c:	0e 94 2e 03 	call	0x65c	; 0x65c <timer0DelayMs>
 if(gpioPinRead(BTN_1_GPIO,BTN_1_BIT) == Pressed)
  430:	81 e0       	ldi	r24, 0x01	; 1
  432:	64 e0       	ldi	r22, 0x04	; 4
@@ -923,7 +923,7 @@ if(gpioPinRead(BTN_1_GPIO,BTN_1_BIT) == Pressed)
 case BTN_0:
 {
 if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
-{ timer0DelayMs(10);
+{ timer0DelayMs(50);
 	if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
 	return Pressed;
  438:	91 e0       	ldi	r25, 0x01	; 1
@@ -932,7 +932,7 @@ if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
  43e:	90 e0       	ldi	r25, 0x00	; 0
  440:	2e c0       	rjmp	.+92     	; 0x49e <pushButtonGetStatus+0xc0>
 }else{return Released;}
-break;		
+break;
 }
 case BTN_2:
 {
@@ -943,10 +943,10 @@ if(gpioPinRead(BTN_2_GPIO,BTN_2_BIT) == Pressed)
  44a:	81 30       	cpi	r24, 0x01	; 1
  44c:	29 f5       	brne	.+74     	; 0x498 <pushButtonGetStatus+0xba>
 {
-	timer0DelayMs(10);
- 44e:	8a e0       	ldi	r24, 0x0A	; 10
+	timer0DelayMs(50);
+ 44e:	82 e3       	ldi	r24, 0x32	; 50
  450:	90 e0       	ldi	r25, 0x00	; 0
- 452:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
+ 452:	0e 94 2e 03 	call	0x65c	; 0x65c <timer0DelayMs>
 	if(gpioPinRead(BTN_2_GPIO,BTN_2_BIT) == Pressed)
  456:	80 e0       	ldi	r24, 0x00	; 0
  458:	64 e0       	ldi	r22, 0x04	; 4
@@ -954,7 +954,7 @@ if(gpioPinRead(BTN_2_GPIO,BTN_2_BIT) == Pressed)
 case BTN_0:
 {
 if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
-{ timer0DelayMs(10);
+{ timer0DelayMs(50);
 	if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
 	return Pressed;
  45e:	91 e0       	ldi	r25, 0x01	; 1
@@ -963,7 +963,7 @@ if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
  464:	90 e0       	ldi	r25, 0x00	; 0
  466:	1b c0       	rjmp	.+54     	; 0x49e <pushButtonGetStatus+0xc0>
 }else{return Released;}
-break;		
+break;
 }
 case BTN_3:
 {
@@ -974,10 +974,10 @@ if(gpioPinRead(BTN_3_GPIO,BTN_3_BIT) == Pressed)
  470:	81 30       	cpi	r24, 0x01	; 1
  472:	a1 f4       	brne	.+40     	; 0x49c <pushButtonGetStatus+0xbe>
 {
-	timer0DelayMs(10);
- 474:	8a e0       	ldi	r24, 0x0A	; 10
+	timer0DelayMs(50);
+ 474:	82 e3       	ldi	r24, 0x32	; 50
  476:	90 e0       	ldi	r25, 0x00	; 0
- 478:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
+ 478:	0e 94 2e 03 	call	0x65c	; 0x65c <timer0DelayMs>
 	if(gpioPinRead(BTN_3_GPIO,BTN_3_BIT) == Pressed)
  47c:	80 e0       	ldi	r24, 0x00	; 0
  47e:	68 e0       	ldi	r22, 0x08	; 8
@@ -985,7 +985,7 @@ if(gpioPinRead(BTN_3_GPIO,BTN_3_BIT) == Pressed)
 case BTN_0:
 {
 if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
-{ timer0DelayMs(10);
+{ timer0DelayMs(50);
 	if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
 	return Pressed;
  484:	91 e0       	ldi	r25, 0x01	; 1
@@ -999,7 +999,7 @@ if(gpioPinRead(BTN_0_GPIO,BTN_0_BIT) == Pressed)
  490:	90 e0       	ldi	r25, 0x00	; 0
  492:	05 c0       	rjmp	.+10     	; 0x49e <pushButtonGetStatus+0xc0>
 {
-timer0DelayMs(10);
+timer0DelayMs(50);
 if(gpioPinRead(BTN_1_GPIO,BTN_1_BIT) == Pressed)
 return Pressed;
 	else {return Released;}
@@ -1007,7 +1007,7 @@ return Pressed;
  494:	90 e0       	ldi	r25, 0x00	; 0
  496:	03 c0       	rjmp	.+6      	; 0x49e <pushButtonGetStatus+0xc0>
 {
-	timer0DelayMs(10);
+	timer0DelayMs(50);
 	if(gpioPinRead(BTN_2_GPIO,BTN_2_BIT) == Pressed)
 	return Pressed;
 else {return Released;}
@@ -1015,15 +1015,16 @@ else {return Released;}
  498:	90 e0       	ldi	r25, 0x00	; 0
  49a:	01 c0       	rjmp	.+2      	; 0x49e <pushButtonGetStatus+0xc0>
 {
-	timer0DelayMs(10);
+	timer0DelayMs(50);
 	if(gpioPinRead(BTN_3_GPIO,BTN_3_BIT) == Pressed)
 	return Pressed;
 else {return Released;}
 }else{return Released;}
  49c:	90 e0       	ldi	r25, 0x00	; 0
-break;		
+break;
 }
 
+}
 }
  49e:	89 2f       	mov	r24, r25
  4a0:	08 95       	ret
@@ -1070,7 +1071,7 @@ timer0Start();
 timer0DelayMs(500);
  4da:	84 ef       	ldi	r24, 0xF4	; 244
  4dc:	91 e0       	ldi	r25, 0x01	; 1
- 4de:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
+ 4de:	0e 94 2e 03 	call	0x65c	; 0x65c <timer0DelayMs>
 //softwareDelayMs(500);
 		if (pushButtonGetStatus(BTN_0))
  4e2:	80 e0       	ldi	r24, 0x00	; 0
@@ -1088,7 +1089,7 @@ timer0Start();
 timer0DelayMs(1000);
  4f6:	88 ee       	ldi	r24, 0xE8	; 232
  4f8:	93 e0       	ldi	r25, 0x03	; 3
- 4fa:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
+ 4fa:	0e 94 2e 03 	call	0x65c	; 0x65c <timer0DelayMs>
 	if (pushButtonGetStatus(BTN_0))
 	{
 	Led_On(LED_0);
@@ -1099,7 +1100,7 @@ timer0Start();
 timer0DelayMs(500);
  502:	84 ef       	ldi	r24, 0xF4	; 244
  504:	91 e0       	ldi	r25, 0x01	; 1
- 506:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
+ 506:	0e 94 2e 03 	call	0x65c	; 0x65c <timer0DelayMs>
 //softwareDelayMs(500);
 		if (pushButtonGetStatus(BTN_0))
  50a:	80 e0       	ldi	r24, 0x00	; 0
@@ -1117,7 +1118,7 @@ timer0Start();
 timer0DelayMs(1000);
  51e:	88 ee       	ldi	r24, 0xE8	; 232
  520:	93 e0       	ldi	r25, 0x03	; 3
- 522:	0e 94 2c 03 	call	0x658	; 0x658 <timer0DelayMs>
+ 522:	0e 94 2e 03 	call	0x65c	; 0x65c <timer0DelayMs>
  526:	cf cf       	rjmp	.-98     	; 0x4c6 <main+0x24>
 		}
 	}
@@ -1228,26 +1229,25 @@ void timer0Set(uint8_t u8_value)
 {
 TCNT0 =	u8_value;
  5ae:	82 bf       	out	0x32, r24	; 50
-	 
 }
  5b0:	08 95       	ret
 
 000005b2 <timer0Read>:
- 
+
 uint8_t timer0Read(void)
 {
-	 return TCNT0;	 
+	 return TCNT0;
  5b2:	82 b7       	in	r24, 0x32	; 50
 }
  5b4:	08 95       	ret
 
 000005b6 <timer0Start>:
 Depending on prescaler	x     X    X
-						
+
 */
 void timer0Start(void)
 {
-	 TCCR0 &= (0xF8);		 
+	 TCCR0 &= (0xF8);
  5b6:	83 b7       	in	r24, 0x33	; 51
  5b8:	88 7f       	andi	r24, 0xF8	; 248
  5ba:	83 bf       	out	0x33, r24	; 51
@@ -1261,15 +1261,15 @@ void timer0Start(void)
 
 000005c8 <timer0Stop>:
 						      0     0    0
-*/ 
+*/
 void timer0Stop(void)
  {
-	 
-TCCR0 &= (0xF8);		 
+
+TCCR0 &= (0xF8);
  5c8:	83 b7       	in	r24, 0x33	; 51
  5ca:	88 7f       	andi	r24, 0xF8	; 248
  5cc:	83 bf       	out	0x33, r24	; 51
-	 
+
  }
  5ce:	08 95       	ret
 
@@ -1290,7 +1290,7 @@ if there is no clock the timer will be disabled
 */
 timer0Stop();
  5d8:	0e 94 e4 02 	call	0x5c8	; 0x5c8 <timer0Stop>
- 5dc:	3a c0       	rjmp	.+116    	; 0x652 <timer0Init+0x82>
+ 5dc:	3c c0       	rjmp	.+120    	; 0x656 <timer0Init+0x86>
 }
 else
 {
@@ -1318,7 +1318,7 @@ switch(en_OC0){
  602:	0c c0       	rjmp	.+24     	; 0x61c <timer0Init+0x4c>
 	case  T0_OC0_DIS:
 	{
-	TCCR0 &= 0xCF;	
+	TCCR0 &= 0xCF;
  604:	83 b7       	in	r24, 0x33	; 51
  606:	8f 7c       	andi	r24, 0xCF	; 207
  608:	83 bf       	out	0x33, r24	; 51
@@ -1336,11 +1336,11 @@ switch(en_OC0){
 	}
 	case  T0_OC0_CLEAR:
 	{
-	TCCR0 |= T0_OC0_CLEAR;	
+	TCCR0 |= T0_OC0_CLEAR;
  614:	83 b7       	in	r24, 0x33	; 51
  616:	80 62       	ori	r24, 0x20	; 32
  618:	83 bf       	out	0x33, r24	; 51
-		
+
 		break;
  61a:	03 c0       	rjmp	.+6      	; 0x622 <timer0Init+0x52>
 	}
@@ -1359,227 +1359,229 @@ OCR0  =u8_outputCompare;
 switch(en_interruptMask){
  624:	81 e0       	ldi	r24, 0x01	; 1
  626:	e8 16       	cp	r14, r24
- 628:	49 f0       	breq	.+18     	; 0x63c <timer0Init+0x6c>
+ 628:	59 f0       	breq	.+22     	; 0x640 <timer0Init+0x70>
  62a:	e8 16       	cp	r14, r24
  62c:	20 f0       	brcs	.+8      	; 0x636 <timer0Init+0x66>
  62e:	82 e0       	ldi	r24, 0x02	; 2
  630:	e8 16       	cp	r14, r24
- 632:	79 f4       	brne	.+30     	; 0x652 <timer0Init+0x82>
- 634:	09 c0       	rjmp	.+18     	; 0x648 <timer0Init+0x78>
+ 632:	89 f4       	brne	.+34     	; 0x656 <timer0Init+0x86>
+ 634:	0b c0       	rjmp	.+22     	; 0x64c <timer0Init+0x7c>
 case  T0_POLLING:
+G_interrupt_Disable();
+ 636:	0e 94 49 01 	call	0x292	; 0x292 <G_interrupt_Disable>
 TIMSK &= T0_POLLING;
- 636:	89 b7       	in	r24, 0x39	; 57
- 638:	19 be       	out	0x39, r1	; 57
+ 63a:	89 b7       	in	r24, 0x39	; 57
+ 63c:	19 be       	out	0x39, r1	; 57
 break;
- 63a:	0b c0       	rjmp	.+22     	; 0x652 <timer0Init+0x82>
+ 63e:	0b c0       	rjmp	.+22     	; 0x656 <timer0Init+0x86>
 case T0_INTERRUPT_NORMAL :
 {
 G_interrupt_Enable();
- 63c:	0e 94 45 01 	call	0x28a	; 0x28a <G_interrupt_Enable>
+ 640:	0e 94 45 01 	call	0x28a	; 0x28a <G_interrupt_Enable>
 TIMSK |= T0_INTERRUPT_NORMAL;
- 640:	89 b7       	in	r24, 0x39	; 57
- 642:	81 60       	ori	r24, 0x01	; 1
- 644:	89 bf       	out	0x39, r24	; 57
+ 644:	89 b7       	in	r24, 0x39	; 57
+ 646:	81 60       	ori	r24, 0x01	; 1
+ 648:	89 bf       	out	0x39, r24	; 57
 break;
- 646:	05 c0       	rjmp	.+10     	; 0x652 <timer0Init+0x82>
+ 64a:	05 c0       	rjmp	.+10     	; 0x656 <timer0Init+0x86>
 }
 case T0_INTERRUPT_CMP:
 {
 G_interrupt_Enable();
- 648:	0e 94 45 01 	call	0x28a	; 0x28a <G_interrupt_Enable>
+ 64c:	0e 94 45 01 	call	0x28a	; 0x28a <G_interrupt_Enable>
 TIMSK |=T0_INTERRUPT_CMP;
- 64c:	89 b7       	in	r24, 0x39	; 57
- 64e:	82 60       	ori	r24, 0x02	; 2
- 650:	89 bf       	out	0x39, r24	; 57
+ 650:	89 b7       	in	r24, 0x39	; 57
+ 652:	82 60       	ori	r24, 0x02	; 2
+ 654:	89 bf       	out	0x39, r24	; 57
 }
-}
-	 
 }
 
 }
- 652:	0f 91       	pop	r16
- 654:	ef 90       	pop	r14
- 656:	08 95       	ret
 
-00000658 <timer0DelayMs>:
- 
- 
- 
+}
+ 656:	0f 91       	pop	r16
+ 658:	ef 90       	pop	r14
+ 65a:	08 95       	ret
+
+0000065c <timer0DelayMs>:
+
+
+
  */
  void timer0DelayMs(uint16_t u16_delay_in_ms)
  {
- 658:	cf 93       	push	r28
- 65a:	df 93       	push	r29
- 65c:	ec 01       	movw	r28, r24
+ 65c:	cf 93       	push	r28
+ 65e:	df 93       	push	r29
+ 660:	ec 01       	movw	r28, r24
 	//uint32_t u32_loop=0;
 	u32_ovf_counter=0;
- 65e:	10 92 60 00 	sts	0x0060, r1
- 662:	10 92 61 00 	sts	0x0061, r1
- 666:	10 92 62 00 	sts	0x0062, r1
- 66a:	10 92 63 00 	sts	0x0063, r1
+ 662:	10 92 60 00 	sts	0x0060, r1
+ 666:	10 92 61 00 	sts	0x0061, r1
+ 66a:	10 92 62 00 	sts	0x0062, r1
+ 66e:	10 92 63 00 	sts	0x0063, r1
 		timer0Set(48);
- 66e:	80 e3       	ldi	r24, 0x30	; 48
- 670:	0e 94 d7 02 	call	0x5ae	; 0x5ae <timer0Set>
+ 672:	80 e3       	ldi	r24, 0x30	; 48
+ 674:	0e 94 d7 02 	call	0x5ae	; 0x5ae <timer0Set>
 		while(u32_ovf_counter <= (8)*u16_delay_in_ms);
- 674:	cc 0f       	add	r28, r28
- 676:	dd 1f       	adc	r29, r29
  678:	cc 0f       	add	r28, r28
  67a:	dd 1f       	adc	r29, r29
  67c:	cc 0f       	add	r28, r28
  67e:	dd 1f       	adc	r29, r29
- 680:	ae 01       	movw	r20, r28
- 682:	60 e0       	ldi	r22, 0x00	; 0
- 684:	70 e0       	ldi	r23, 0x00	; 0
- 686:	80 91 60 00 	lds	r24, 0x0060
- 68a:	90 91 61 00 	lds	r25, 0x0061
- 68e:	a0 91 62 00 	lds	r26, 0x0062
- 692:	b0 91 63 00 	lds	r27, 0x0063
- 696:	48 17       	cp	r20, r24
- 698:	59 07       	cpc	r21, r25
- 69a:	6a 07       	cpc	r22, r26
- 69c:	7b 07       	cpc	r23, r27
- 69e:	98 f7       	brcc	.-26     	; 0x686 <timer0DelayMs+0x2e>
-	
-}
- 6a0:	df 91       	pop	r29
- 6a2:	cf 91       	pop	r28
- 6a4:	08 95       	ret
+ 680:	cc 0f       	add	r28, r28
+ 682:	dd 1f       	adc	r29, r29
+ 684:	ae 01       	movw	r20, r28
+ 686:	60 e0       	ldi	r22, 0x00	; 0
+ 688:	70 e0       	ldi	r23, 0x00	; 0
+ 68a:	80 91 60 00 	lds	r24, 0x0060
+ 68e:	90 91 61 00 	lds	r25, 0x0061
+ 692:	a0 91 62 00 	lds	r26, 0x0062
+ 696:	b0 91 63 00 	lds	r27, 0x0063
+ 69a:	48 17       	cp	r20, r24
+ 69c:	59 07       	cpc	r21, r25
+ 69e:	6a 07       	cpc	r22, r26
+ 6a0:	7b 07       	cpc	r23, r27
+ 6a2:	98 f7       	brcc	.-26     	; 0x68a <timer0DelayMs+0x2e>
 
-000006a6 <timer0DelayUs>:
+}
+ 6a4:	df 91       	pop	r29
+ 6a6:	cf 91       	pop	r28
+ 6a8:	08 95       	ret
+
+000006aa <timer0DelayUs>:
  at pooling _no prescaling
  240at TCNT0
- 
+
  */
  void timer0DelayUs(uint32_t u32_delay_in_us)
  {  uint32_t u32_loop=0;
- 6a6:	dc 01       	movw	r26, r24
- 6a8:	cb 01       	movw	r24, r22
+ 6aa:	dc 01       	movw	r26, r24
+ 6ac:	cb 01       	movw	r24, r22
 	u32_ovf_counter=0;
- 6aa:	10 92 60 00 	sts	0x0060, r1
- 6ae:	10 92 61 00 	sts	0x0061, r1
- 6b2:	10 92 62 00 	sts	0x0062, r1
- 6b6:	10 92 63 00 	sts	0x0063, r1
+ 6ae:	10 92 60 00 	sts	0x0060, r1
+ 6b2:	10 92 61 00 	sts	0x0061, r1
+ 6b6:	10 92 62 00 	sts	0x0062, r1
+ 6ba:	10 92 63 00 	sts	0x0063, r1
 	for (u32_loop=0;u32_loop<u32_delay_in_us;u32_loop++)
- 6ba:	00 97       	sbiw	r24, 0x00	; 0
- 6bc:	a1 05       	cpc	r26, r1
- 6be:	b1 05       	cpc	r27, r1
- 6c0:	31 f0       	breq	.+12     	; 0x6ce <timer0DelayUs+0x28>
+ 6be:	00 97       	sbiw	r24, 0x00	; 0
+ 6c0:	a1 05       	cpc	r26, r1
+ 6c2:	b1 05       	cpc	r27, r1
+ 6c4:	31 f0       	breq	.+12     	; 0x6d2 <timer0DelayUs+0x28>
 	{
 	timer0Set(240);
- 6c2:	80 ef       	ldi	r24, 0xF0	; 240
- 6c4:	0e 94 d7 02 	call	0x5ae	; 0x5ae <timer0Set>
-	while(timer0Read()<=255);	
- 6c8:	0e 94 d9 02 	call	0x5b2	; 0x5b2 <timer0Read>
- 6cc:	fd cf       	rjmp	.-6      	; 0x6c8 <timer0DelayUs+0x22>
+ 6c6:	80 ef       	ldi	r24, 0xF0	; 240
+ 6c8:	0e 94 d7 02 	call	0x5ae	; 0x5ae <timer0Set>
+	while(timer0Read()<=255);
+ 6cc:	0e 94 d9 02 	call	0x5b2	; 0x5b2 <timer0Read>
+ 6d0:	fd cf       	rjmp	.-6      	; 0x6cc <timer0DelayUs+0x22>
 	//while(u32_ovf_counter <= (8*u32_delay_in_us/1000));
 	}
 	TIFR |=(1<<TOV0);/*Clear the flag*/
- 6ce:	88 b7       	in	r24, 0x38	; 56
- 6d0:	81 60       	ori	r24, 0x01	; 1
- 6d2:	88 bf       	out	0x38, r24	; 56
+ 6d2:	88 b7       	in	r24, 0x38	; 56
+ 6d4:	81 60       	ori	r24, 0x01	; 1
+ 6d6:	88 bf       	out	0x38, r24	; 56
 }/*1*/
- 6d4:	08 95       	ret
+ 6d8:	08 95       	ret
 
-000006d6 <timer0SwPWM>:
+000006da <timer0SwPWM>:
 void timer0SwPWM(uint8_t u8_dutyCycle,uint8_t u8_frequency)
 {
 	 u32_ovf_counter=0;
- 6d6:	10 92 60 00 	sts	0x0060, r1
- 6da:	10 92 61 00 	sts	0x0061, r1
- 6de:	10 92 62 00 	sts	0x0062, r1
- 6e2:	10 92 63 00 	sts	0x0063, r1
+ 6da:	10 92 60 00 	sts	0x0060, r1
+ 6de:	10 92 61 00 	sts	0x0061, r1
+ 6e2:	10 92 62 00 	sts	0x0062, r1
+ 6e6:	10 92 63 00 	sts	0x0063, r1
 	 timer0Set(155);
- 6e6:	8b e9       	ldi	r24, 0x9B	; 155
- 6e8:	0e 94 d7 02 	call	0x5ae	; 0x5ae <timer0Set>
+ 6ea:	8b e9       	ldi	r24, 0x9B	; 155
+ 6ec:	0e 94 d7 02 	call	0x5ae	; 0x5ae <timer0Set>
 	 while(u32_ovf_counter <= 1);
- 6ec:	80 91 60 00 	lds	r24, 0x0060
- 6f0:	90 91 61 00 	lds	r25, 0x0061
- 6f4:	a0 91 62 00 	lds	r26, 0x0062
- 6f8:	b0 91 63 00 	lds	r27, 0x0063
- 6fc:	82 30       	cpi	r24, 0x02	; 2
- 6fe:	91 05       	cpc	r25, r1
- 700:	a1 05       	cpc	r26, r1
- 702:	b1 05       	cpc	r27, r1
- 704:	98 f3       	brcs	.-26     	; 0x6ec <timer0SwPWM+0x16>
-	 
-	 
-} 
- 706:	08 95       	ret
+ 6f0:	80 91 60 00 	lds	r24, 0x0060
+ 6f4:	90 91 61 00 	lds	r25, 0x0061
+ 6f8:	a0 91 62 00 	lds	r26, 0x0062
+ 6fc:	b0 91 63 00 	lds	r27, 0x0063
+ 700:	82 30       	cpi	r24, 0x02	; 2
+ 702:	91 05       	cpc	r25, r1
+ 704:	a1 05       	cpc	r26, r1
+ 706:	b1 05       	cpc	r27, r1
+ 708:	98 f3       	brcs	.-26     	; 0x6f0 <timer0SwPWM+0x16>
 
-00000708 <timer1Init>:
+
+}
+ 70a:	08 95       	ret
+
+0000070c <timer1Init>:
  En_timer1Interrupt_t en_interruptMask)
  {
-	 
-	 
-	 
- }
- 708:	08 95       	ret
 
-0000070a <timer1Set>:
+
+
+ }
+ 70c:	08 95       	ret
+
+0000070e <timer1Set>:
  * @param value
  */
 void timer1Set(uint16_t u16_value)
 {
-	
-}
- 70a:	08 95       	ret
 
-0000070c <timer1Read>:
+}
+ 70e:	08 95       	ret
+
+00000710 <timer1Read>:
  */
 uint16_t timer1Read(void)
 {
-	
-	
-}
- 70c:	08 95       	ret
 
-0000070e <timer1Start>:
+
+}
+ 710:	08 95       	ret
+
+00000712 <timer1Start>:
 void timer1Start(void)
 {
 
 
-	
-}
- 70e:	08 95       	ret
 
-00000710 <timer1Stop>:
-void timer1Stop(void)
-{
-	
-	
-	
-}
- 710:	08 95       	ret
-
-00000712 <timer1DelayMs>:
- */
-void timer1DelayMs(uint16_t u16_delay_in_ms)
-{
-	
-	
 }
  712:	08 95       	ret
 
-00000714 <timer1DelayUs>:
- */
-void timer1DelayUs(uint32_t u32_delay_in_us)
+00000714 <timer1Stop>:
+void timer1Stop(void)
 {
-	
-	
+
+
+
 }
  714:	08 95       	ret
 
-00000716 <timer1SwPWM>:
+00000716 <timer1DelayMs>:
  */
-void timer1SwPWM(uint8_t u8_dutyCycle,uint8_t u8_frequency)
+void timer1DelayMs(uint16_t u16_delay_in_ms)
 {
-	
-	
+
+
 }
  716:	08 95       	ret
 
-00000718 <_exit>:
- 718:	f8 94       	cli
+00000718 <timer1DelayUs>:
+ */
+void timer1DelayUs(uint32_t u32_delay_in_us)
+{
 
-0000071a <__stop_program>:
- 71a:	ff cf       	rjmp	.-2      	; 0x71a <__stop_program>
+
+}
+ 718:	08 95       	ret
+
+0000071a <timer1SwPWM>:
+ */
+void timer1SwPWM(uint8_t u8_dutyCycle,uint8_t u8_frequency)
+{
+
+
+}
+ 71a:	08 95       	ret
+
+0000071c <_exit>:
+ 71c:	f8 94       	cli
+
+0000071e <__stop_program>:
+ 71e:	ff cf       	rjmp	.-2      	; 0x71e <__stop_program>
